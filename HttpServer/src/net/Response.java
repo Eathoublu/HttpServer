@@ -1,9 +1,11 @@
 package net;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -69,9 +71,11 @@ public class Response {
 	
 	public void doPost() throws IOException {
 		//读取body
-		//.....
-		//可自行实现
-		//.....
+		BufferedReader reader = request.getReader();
+		int length = Integer.parseInt(request.getOptions().get("Content-Length"));
+		char[] buffer = new char[length];
+		reader.read(buffer);
+		System.out.println("post请求中的数据:\n" + new String(buffer));
 		if(request.getUrl().equals("/index.html")) {
 			File indexFIle = new File(base + "/index.html");
 			sendHeader(writer, "Http/1.1 200 OK", "text/html", indexFIle.length());
