@@ -46,11 +46,9 @@ public class HttpServer {
 			for (Property property : webProperties) {
 				if(property.getName().equals("port")) {
 					this.port = Integer.parseInt(property.getValue());
-					System.out.println(port);
 				}
 				if (property.getName().equals("poolSize")) {
 					this.poolSize = Integer.parseInt(property.getValue());
-					System.out.println(poolSize);
 				}
 			}
 		}

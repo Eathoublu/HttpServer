@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 
 public class Request {
 	//请求方法
@@ -12,9 +13,12 @@ public class Request {
 	private String url;
 	//http版本，在这个程序中，默认请求都是基于http1.0以上的
 	private double version;
+	private HashMap<String, String> options = new HashMap<>();
+	private InputStream inputStream;
 	private BufferedReader reader; 
 	
 	public Request(InputStream in) {
+		this.inputStream = in;
 		this.reader = new BufferedReader(new InputStreamReader(in));
 		resolve();
 	}
@@ -30,7 +34,11 @@ public class Request {
 			//读取整个请求头
 			line = reader.readLine();
 			while(!line.equals("")) {
-				line = reader.readLine();
+				String[] splits = line.split(":");
+				String key = splits[0].trim();
+				String value = splits[1].trim();
+				options.put(key, value);
+				line = reader.readLine().trim();
 			}
 		}catch (IOException e) {
 			System.out.println("无法读取请求行");
@@ -49,4 +57,11 @@ public class Request {
 	public BufferedReader getReader() {
 		return reader;
 	}
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+	public HashMap<String, String> getOptions() {
+		return options;
+	}
+	
 }

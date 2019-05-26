@@ -127,7 +127,7 @@ public class Response {
 		byte[] buffer = new byte[1024];
 		@SuppressWarnings("resource")
 		FileInputStream fileInputStream = new FileInputStream(file);
-		
+		//当文件可读长度大于0时，读取数据并发送给浏览器
 		while(fileInputStream.available() > 0) {
 			int length = fileInputStream.read(buffer);
 			out.write(buffer, 0 , length);
