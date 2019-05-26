@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<properties>
+	<!-- 服务器监听端口 -->
+	<property>
+		<name>port</name>
+		<value>80</value>
+	</property>
+	<!-- 线程池大小 -->
+	<property>
+		<name>poolSize</name>
+		<value>50</value>
+	</property>
+</properties>
